@@ -26,7 +26,6 @@ async function fireFly() {
         count = 1;
     }
 
-    // Clear the console
     console.clear();
 
     for (let i = 0; i < m; i++) {
@@ -51,12 +50,12 @@ async function fireFly() {
 
     moveStar();
 
-    // Wait for 200 milliseconds before the next iteration
+
     await new Promise(resolve => setTimeout(resolve, 200));
 
-    // Call fireFly function recursively after waiting
+  
     fireFly();
 }
 
-// Call fireFly function initially to start the animation
+
 fireFly();
