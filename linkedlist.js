@@ -1,5 +1,6 @@
-/** This is my first attempt to try and create a linked list in javascript
+/** This is my attempt to try and create a linked list in javascript
  * with functionalities like insert / delete at head,tail or any nth postion
+ * for any type of data as input except null and undefined
  */
 
 /** Creating the class node and a constructor 
@@ -42,14 +43,14 @@ class linkedList
     }
     /** This method is used to insert data at head of the linked list
      * @param {Number} data the data that will be inputed in the node
-     * @throws {Error} when the data is not a number
+     * @throws {Error} when the data is not defined
      * head is also updated to newNode since its the first node in
      * the list now 
      */
     insertHead(data)
     {
-        if (typeof data !== 'number' || isNaN(data)) {
-            throw new Error('Data must be a number')
+        if (data === undefined || data === null ) {
+            throw new Error('Data must be a defined')
         }
         const newNODE = new node(data)
         newNODE.next = this.head
@@ -57,12 +58,12 @@ class linkedList
     }
     /** This method is used to insert data at tail of linked list
      * @param {number} data the data that will be inputed in the node
-     * @throws {Error} when the data is not a number
+     * @throws {Error} when the data is not defined
      */
     insertTail(data)
     {
-        if (typeof data !== 'number' || isNaN(data)) {
-            throw new Error('Data must be a number');
+        if (data === undefined || data === null ) {
+            throw new Error('Data must be a defined')
         }
         if(!this.head)
         {
@@ -85,11 +86,12 @@ class linkedList
      */
     insertMiddle(n,data)
     {
-        if (isNaN(parseInt(data))) 
+        if (data === undefined || data === null ) 
         {
-            throw new Error('Data must be a number');
+            throw new Error('Data must be a defined')
         }
-        if (isNaN(n) || n>0 || n>=this.sizeOflinkedlist()) {
+        if (isNaN(n) || n<0 || n>=this.sizeOflinkedlist()) 
+        {
             throw new Error('Index Invalid')
         }
         if(n === 1)
@@ -97,6 +99,7 @@ class linkedList
             this.insertHead(data)
             return
         }
+        let newNode = new node(data);
         let curr = this.head
         let count = 1
         while(count!=n-1){
@@ -157,7 +160,7 @@ class linkedList
         }
         if(curr.next)
         {
-            current.next = curr.next.next
+            curr.next = curr.next.next
         }
     }
     /**This method prints the whole linked list */
@@ -172,3 +175,15 @@ class linkedList
     }
 }
 
+const list1 = new linkedList()
+
+list1.insertHead(7)
+list1.insertHead(9)
+list1.insertTail(69)
+list1.insertMiddle(2,76)
+list1.insertHead('we')
+list1.insertTail('Atharva')
+list1.insertMiddle(3,56)
+list1.deleteHead()
+list1.deleteTail()
+list1.printLinkedlist()
