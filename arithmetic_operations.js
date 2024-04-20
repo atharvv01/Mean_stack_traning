@@ -2,6 +2,41 @@
  * @author Atharva
  */
 
+
+/**This function finds out bigger array from given two arrays
+ * @param {Array} arr1 first array
+ * @param {Array} arr2 second array
+ * @returns {True} if array2 is greater than array 1  
+ */
+function findBiggerArray(arr1,arr2)
+{
+	/**First we check weather length of array 2 is bigger if so return 2 */
+	if(arr2.length>arr1.length)
+	{
+		return true
+	}
+
+	/**Then we will check if the first index of array2 is bigger */
+	else if(arr2[0]>arr1[0])
+	{
+		return true
+	}
+	/**Even if the first index is same then we will run a for loop from
+	 * 2nd index to last index to check all the indexes of both arrays
+	 * if at any given index we find array2 is greater we return true else 
+	 * even after loop is over we dont find any greater number means array1
+	 * is greater so return false
+	 */
+	for(let i =1;i<arr2.length;i++)
+	{
+		if(arr2[i]>arr1[i])
+		{
+			return true
+		}
+	}
+	return false
+}
+
 /**This function checks if given array has data as integer only
  * and no other data is inputed and also data is single digit number
  * @param {Array} arr which data is to be checked
@@ -208,7 +243,7 @@ function subTwoNos(arr1, arr2) {
 			/**
 			 * this if condition checks if array 2 is larger and marks a flag to 1 if true 
 			 */
-			if (arr2.length > arr1.length || (arr2.length === arr1.length && arr2[0] > arr1[0])) {
+			if (findBiggerArray(arr1,arr2)) {
 				[arr1, arr2] = [arr2, arr1];
 				flag = 1
 
@@ -221,7 +256,7 @@ function subTwoNos(arr1, arr2) {
 				diff--
 			}
 			for (let i = arr1.length - 1; i >= 0; i--) {
-				if (arr1[i] < arr2[i]) {
+				if ((arr1[i]-borrow) < arr2[i]) {
 					/**Enters this condition when you need to borrow i.e when value
 					 * of upper digit is lower than that of lower digit 
 					 */
@@ -249,7 +284,7 @@ function subTwoNos(arr1, arr2) {
 					 * of upper digit is greater than that of lower digit but there is no borrow
 					 */
 					if (borrow) {
-						arr1[i] = arr1[i] - borrow
+						arr1[i] = arr1[i]- borrow
 						ansArr[i] = arr1[i] - arr2[i]
 						borrow--
 					} else {
@@ -377,11 +412,9 @@ function divTwoNos(arr1,arr2){
 	//LOGIC TO BE WRITTEN 
 }
 
-
 /**This is a unit test cased used to check the sainity of the program
  * @author Atharva
  */
-
 function testFunction1() {
 	let variable1 = [1, 0, 0, 0, 0, 0, 0, 0]
 	let variable2 = [1]
@@ -391,11 +424,12 @@ function testFunction1() {
 }
 
 function testFunction2() {
-	let variable2 = [-1, 0]
-	let variable1 = [2, 0]
+	let variable1 = [1,4]
+	let variable2 = [1]
 
-	const ans1 = mulTwoNos(variable1, variable2)
-	console.log("variable 1 = 33 and variable 2 = 3 and ans = " + ans1)
+	const ans1 = subTwoNos(variable1, variable2)
+	console.log("variable 1 = "+variable1+ "\nvariable 2 = "+variable2+ "\nans = " + ans1)
 }
-testFunction1()
+
+//testFunction1()
 testFunction2()
